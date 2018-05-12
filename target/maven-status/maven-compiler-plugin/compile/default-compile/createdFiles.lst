@@ -1,0 +1,9 @@
+com/stock/api/service/ValidationService.class
+com/stock/api/model/StocksReder.class
+com/stock/api/model/Stock.class
+com/stock/api/service/UserService.class
+com/stock/api/StockApiProject.class
+com/stock/api/controllers/StockController.class
+com/stock/api/model/StockState.class
+com/stock/api/database/Database.class
+com/stock/api/controllers/UsersController.class
