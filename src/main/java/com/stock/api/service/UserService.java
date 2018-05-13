@@ -87,7 +87,6 @@ public class UserService {
                     users.get(id).forEach(p -> {
                         if (p.getStock().getName().equals(stock.getStock().getName()) && ( p.getNumberOfStocks() !=  0)) {
                             p.setNumberOfStocks(p.getNumberOfStocks() - stock.getNumberOfStocks());
-
                         }
                     });
                 } else {
@@ -99,9 +98,20 @@ public class UserService {
                 }
 
             }else {
+
                 users.get(id).add(stock);
             }
         }
+
+        //delete all stocks with 0 value
+        for (int i = 0; i < users.get(id).size(); i++) {
+            if (users.get(id).get(i).getNumberOfStocks() == 0 ){
+                users.get(id).remove(i);
+            }
+
+        }
+
+
         return ans;
     }
 
