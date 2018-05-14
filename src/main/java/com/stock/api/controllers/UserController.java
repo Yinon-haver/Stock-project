@@ -1,24 +1,20 @@
 package com.stock.api.controllers;
-import com.stock.api.model.Stock;
+
 import com.stock.api.model.StockState;
 import com.stock.api.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Map;
 
-
-
 @RestController
-public class UsersController {
+public class UserController {
 
-    private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 
     @Autowired
@@ -43,7 +39,7 @@ public class UsersController {
     }
 
     @RequestMapping(value = "/users" , method = RequestMethod.GET)
-    public Map<Integer, List<StockState>> getAllUsers(){
+    public Map<Integer, Map<String, StockState>> getAllUsers(){
         logger.info("UsersController.get all users and their stocks");
         return userService.getAllUsersName();
     }
@@ -60,10 +56,10 @@ public class UsersController {
     @RequestMapping(value = "/users/portfolio/{id}" , method = RequestMethod.GET)
     public String getUserPortfolio(@PathVariable int id){
         logger.info("UsersController.get user's Portfolio ");
-       double ans = userService.getPortfolio(id);
-       if (ans == 0){
-           return "Some  stock does not exist in the system please add the stock first to the DB , you can use that API call -> POST /stocks : add new stock to DB , need to send stock name  ";
-       }
+        double ans = userService.getPortfolio(id);
+        if (ans == 0){
+            return "Some  stock does not exist in the system please add the stock first to the DB , you can use that API call -> POST /stocks : add new stock to DB , need to send stock name  ";
+        }
         return " Your Portfolio is :   "+ ans;
     }
 
@@ -74,26 +70,26 @@ public class UsersController {
     }
 
     @RequestMapping(value = "/users" , method = RequestMethod.POST)
-    public  String newClient(@Valid @RequestBody List<@Valid StockState>  userRequest ,BindingResult bindingResult){
+    public  String newClient(@Valid @RequestBody Map<String, StockState>  userRequest , BindingResult bindingResult){
         logger.info("UsersController.send stocks and create new user");
         if (bindingResult.hasFieldErrors()){
             return "error";
         }
         int ans = userService.addUser(userRequest);
-       if(ans == 0 ){
-           return "can't sell stock before you bought them or cant enter negative number of stocks ";
-       }
+        if(ans == 0 ){
+            return "can't sell stock before you bought them or cant enter negative number of stocks ";
+        }
         return "new user was created and id number is : "+ ans;
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.PUT)
-    public String updateUser(@Valid @RequestBody List<StockState> userRequest, @PathVariable int id){
+    public String updateUser(@Valid @RequestBody Map<String, StockState> userRequest, @PathVariable int id){
         logger.info("UsersController.send update to user's stocks");
         String ans =  userService.updateUser(userRequest,id);
         if (ans != null){
             return ans;
         }
-         return "user with id "+ id+ " was update";
+        return "user with id "+ id+ " was update";
     }
 
     @RequestMapping(value = "/users/{id}",method = RequestMethod.DELETE)

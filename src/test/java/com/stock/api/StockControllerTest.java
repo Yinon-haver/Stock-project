@@ -1,6 +1,6 @@
 package com.stock.api;
 
-import com.stock.api.controllers.UsersController;
+import com.stock.api.controllers.UserController;
 import org.springframework.beans.factory.annotation.Autowired;
 
 //
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 //@SpringBootTest
 public class StockControllerTest {
     @Autowired
-    UsersController stockController;
+    com.stock.api.controllers.UserController UserController;
 
 
 }
