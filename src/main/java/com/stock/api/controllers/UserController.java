@@ -26,11 +26,11 @@ public class UserController {
         userService.enterDataToDatabaseAndToValidation();
         return "======================\nWelcome to Stock API\n====================== \n\n"+
                 "GET /users  : get all users in DB\n" +
-                "GET /users/{id} : get specific user list of stocks \n" +
+                "GET /users/{id} : get specific user Map of stocks \n" +
                 "GET /users/portfolio/{id} : get specific user portfolio \n" +
                 "GET /users/recommendation/{id}/{type} : get some recommendation about stocks , type value between 1-3 and id \n" +
-                "POST /users : add new user , need to send list of stock\n" +
-                "PUT /users/{id} : update user's  sold/bought , need to send list of stock \n"+
+                "POST /users : add new user , need to send Map of stock (you can see example in /users\n" +
+                "PUT /users/{id} : update user's  sold/bought , need to send Map of stock \n"+
                 "DELETE /users/{id} : delete user from DB  \n"+
                 "GET /stocks : get all stocks name in DB \n"+
                 "POST /stocks : add new stocks to DB , need to send stocks name ans list of last 7 days price \n"+
