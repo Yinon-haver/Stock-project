@@ -125,7 +125,7 @@ public class UserService {
         for (Map.Entry<String, StockState> item : userRequest.entrySet()) {
             StockState stockState = item.getValue();
             if (stockState.isSold() && users.get(id).get(stockState.getStock().getName()).getNumberOfStocks() < stockState.getNumberOfStocks()) {
-                return "can't sell stock more then you have or stocks dosent exsist ";
+                return "can't sell stock more then you have or stocks dose not exist check stock : "+ stockState.getStock().getName()+" details";
             }
         }
 
@@ -138,15 +138,13 @@ public class UserService {
                     } else {
                         Stock tempStock = new Stock(stockState.getStock().getName());
                         int numberOfStocks = users.get(id).get(stockState.getStock().getName()).getNumberOfStocks() - stockState.getNumberOfStocks();
-                        //delete all stocks with 0 value
+                        //delete all stocks with 0 amount
                         if (numberOfStocks == 0) {
                             users.get(id).remove(stockState.getStock().getName());
-                            //users.get(id).remove(stockState.getStock().getName(),stockState);
                         } else {
                             StockState tempStockState = new StockState(tempStock, numberOfStocks, false);
                             users.get(id).put(stockState.getStock().getName(), tempStockState);
                         }
-
                     }
                 } else {
                     Stock tempStock = new Stock(stockState.getStock().getName());
