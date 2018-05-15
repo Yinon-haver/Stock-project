@@ -166,7 +166,7 @@ public class UserService {
         double portfolio = 0;
         for (Map.Entry<String, StockState> item : users.get(id).entrySet()) {
             StockState stockState = item.getValue();
-            if (validationService.getStocksHistoryPrice() != null) {
+            if (validationService.getStocksHistoryPrice().get(stockState.getStock().getName()) != null) {
                 portfolio += stockState.getNumberOfStocks() * validationService.getStocksCurrentPrice().get(stockState.getStock().getName());
             } else {
                 portfolio = 0;
