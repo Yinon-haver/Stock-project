@@ -58,7 +58,7 @@ public class UserController {
         logger.info("UsersController.get user's Portfolio ");
         double ans = userService.getPortfolio(id);
         if (ans == 0){
-            return "Some  stock does not exist in the system please add the stock first to the DB , you can use that API call -> POST /stocks : add new stock to DB , need to send stock name  ";
+            return "Some  stock does not exist in the system please add the stock first to the DB , you can use that API call -> POST /stocks ";
         }
         return " Your Portfolio is :   "+ ans;
     }

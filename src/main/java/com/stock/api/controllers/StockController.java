@@ -31,9 +31,13 @@ public class StockController {
     }
 
     @RequestMapping(value = "/StockHistoryPrice/{stockname}",method = RequestMethod.GET)
-    public List<Double> getHistoryStockPrice(@PathVariable Stock stockname){
+    public String getHistoryStockPrice(@PathVariable Stock stockname){
         logger.info("StockController.get history prices for specific stock");
-        return stockService.getHistoryStockPrice(stockname);
+        if(stockService.getHistoryStockPrice(stockname) == null){
+            return "the stock does not exist in DB";
+        }else {
+            return "stock prices is :" +stockService.getHistoryStockPrice(stockname);
+        }
     }
 
     @RequestMapping(value = "/historyStocksPrices" , method = RequestMethod.GET)

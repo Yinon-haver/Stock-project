@@ -35,8 +35,14 @@ public class StockService {
         }
     }
 
-    public List<Double> getHistoryStockPrice(Stock stock){
-        return   validationService.getStocksHistoryPrice().get(stock.getName());
+    public Object getHistoryStockPrice(Stock stock){
+        List<Double> ans = new ArrayList<>();
+        ans =validationService.getStocksHistoryPrice().get(stock.getName());
+        if (ans==null){
+            return null;
+        }else {
+            return   validationService.getStocksHistoryPrice().get(stock.getName());
+        }
     }
 
     public Map<String, List<Double>> getAllHistoryStockPrices() {
