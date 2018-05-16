@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
 public class UserController {
@@ -39,7 +40,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users" , method = RequestMethod.GET)
-    public Map<Integer, Map<String, StockState>> getAllUsers(){
+    public Map<Integer, ConcurrentHashMap<String, StockState>> getAllUsers(){
         logger.info("UsersController.get all users and their stocks");
         return userService.getAllUsersName();
     }
@@ -75,7 +76,7 @@ public class UserController {
         if (bindingResult.hasFieldErrors()){
             return "error";
         }
-        int ans = userService.addUser(userRequest);
+        int ans = userService.addUser((ConcurrentHashMap<String, StockState>) userRequest);
         if(ans == 0 ){
             return "can't sell stock before you bought them or cant enter negative number of stocks ";
         }
