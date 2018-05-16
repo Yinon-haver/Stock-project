@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class ValidationService {
 
-    private Map<String,Double> stocksCurrentPrice = new HashMap<>();
-    private Map<String,List<Double>> stocksHistoryPrice = new HashMap<>();
+    private Map<String,Double> stocksCurrentPrice =  new ConcurrentHashMap<>();
+    private Map<String,List<Double>> stocksHistoryPrice = new ConcurrentHashMap<>();
 
     public void addCurrentStockrice(String stockName , Double stockPrice){
         stocksCurrentPrice.put(stockName,stockPrice);
