@@ -71,12 +71,12 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users" , method = RequestMethod.POST)
-    public  String newClient(@Valid @RequestBody Map<String, StockState>  userRequest , BindingResult bindingResult){
+    public  String newClient(@Valid @RequestBody ConcurrentHashMap<String, StockState>  userRequest , BindingResult bindingResult){
         logger.info("UsersController.send stocks and create new user");
         if (bindingResult.hasFieldErrors()){
             return "error";
         }
-        int ans = userService.addUser((ConcurrentHashMap<String, StockState>) userRequest);
+        int ans = userService.addUser( userRequest);
         if(ans == 0 ){
             return "can't sell stock before you bought them or cant enter negative number of stocks ";
         }
