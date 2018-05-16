@@ -10,9 +10,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class UserService {
@@ -20,11 +20,11 @@ public class UserService {
     @Autowired
     private ValidationService validationService;
 
-    private Map<Integer, Map<String, StockState>> users = MapDatabase.getUsers();
+    private Map<Integer, ConcurrentHashMap<String, StockState>> users = MapDatabase.getUsers();
 
     private int ID = 10000;
 
-    public int addUser(Map<String, StockState> user) {
+    public int addUser(ConcurrentHashMap<String, StockState> user) {
 
         for (Map.Entry<String, StockState> item : user.entrySet()) {
             StockState stockState = item.getValue();
@@ -40,7 +40,7 @@ public class UserService {
 
     public void enterDataToDatabaseAndToValidation() {
         for (int i = 0; i < 3; i++) {
-            Map<String, StockState> tempMap = new HashMap<>();
+            ConcurrentHashMap<String, StockState> tempMap =  new ConcurrentHashMap<>();
             for (int j = 0; j < 7; j++) {
                 Stock name = new Stock("lp " + j);
                 String nameMap = "lp " + j;
@@ -110,7 +110,7 @@ public class UserService {
         validationService.getStocksCurrentPrice().put("LP", 170.0);
     }
 
-    public Map<Integer, Map<String, StockState>> getAllUsersName() {
+    public  Map<Integer, ConcurrentHashMap<String, StockState>> getAllUsersName() {
         return users;
     }
 

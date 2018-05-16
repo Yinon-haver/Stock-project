@@ -8,9 +8,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class MapDatabase {
 
-    private static Map<Integer,Map<String,StockState> > MapUsers = new ConcurrentHashMap<>();;
+    private static Map<Integer,ConcurrentHashMap<String,StockState> > MapUsers = new ConcurrentHashMap<>();;
 
-    public static  Map<Integer,Map<String,StockState> > getUsers(){
+    public static  Map<Integer,ConcurrentHashMap<String,StockState> > getUsers(){
         return MapUsers;
     }
 
